@@ -1,23 +1,32 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const Hogs = props => {
+import Hog from './Hog.js'
 
-    const imgs = {}
+// class Hogs extends Component {
 
-    function importAll(r) {
-        r.keys().forEach((key) => (imgs[key] = r(key)));
-    }
+//     handleClick = (hog) => {
+//         return <Hog hog={hog}/>
 
-    importAll(require.context(`../hog-imgs`, true))
-    return(
-        <div>
-            <h1>Hogs</h1>
-            {props.hogs.map(hog =>
-            <div className="pigTile">
-                <h3>{hog.name}</h3>
-                <img src={require(`../hog-imgs/${hog.name.split(" ").join("_").toLocaleLowerCase()}.jpg`)} alt={hog.name}/>
+
+//     }
+//     // const imgs = {}
+
+//     // function importAll(r) {
+//     //     r.keys().forEach((key) => (imgs[key] = r(key)));
+//     // }
+
+//     // importAll(require.context(`../hog-imgs`, true))
+//     render() {
+
+//         )
+//     }
+// }
+const Hogs = (props) => {
+    return (
+        <div className="ui grid container">
+            <div className="ui four wide column">
+            {props.hogs.map(hog => (<Hog key={hog.name} hog={hog} />))}
             </div>
-                )}
         </div>
     )
 }
