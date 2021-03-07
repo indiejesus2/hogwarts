@@ -3,8 +3,9 @@ import React, {Component } from 'react'
 class Hog extends Component {
 
     state = {
-        showDetails: false
-        
+        showDetails: false,
+        hidePig: false
+
     }
     handleClick = () => {
         this.setState(prevState => {
@@ -27,12 +28,30 @@ class Hog extends Component {
         )
     }
 
+    handleDisplay = () => {
+        this.setState(prevState => {
+            return {
+                hidePig: !prevState.hidePig
+            }
+        })
+    }
+
+    keepDisplay = () => {
+        if(this.state.hidePig == 1) {
+            return <button onClick={this.handleDisplay}>+</button>
+        } else {
+            return <button onClick={this.handleDisplay}>-</button>
+            
+        }
+    }
+
     render() {
         return(
-                <div className="pigTile" onClick={this.handleClick}>
-                    <img src={require(`../hog-imgs/${this.props.hog.name.split(" ").join("_").toLocaleLowerCase()}.jpg`)} alt={this.props.hog.name} />
+                <div className="pigTile" onClick={this.handleClick} >
+                    <img src={require(`../hog-imgs/${this.props.hog.name.split(" ").join("_").toLocaleLowerCase()}.jpg`)} alt={this.props.hog.name} style={{display: this.state.hidePig ? 'none' : 'inline'}}/>
                     <h3>{this.props.hog.name}</h3>
                     { this.state.showDetails ? this.details() : null }
+                    {this.keepDisplay()}
                 </div>
             )
     }
